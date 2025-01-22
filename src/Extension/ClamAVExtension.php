@@ -64,6 +64,12 @@ class ClamAVExtension extends DataExtension
             $doVirusScan = true;
         }
 
+        $isOnlyPublishedFiles = ClamAV::config()->get('only_published_files');
+
+        if ($isOnlyPublishedFiles) {
+            $doVirusScan = $this->owner->isPublished();
+        }
+
         // NOTE(Jake): Perhaps add $this->extend('updateDoVirusScan'); so other modules can support this.
 
         // Skip scanning unless the *physical* file on disk/CDN/etc has changed
@@ -190,6 +196,13 @@ class ClamAVExtension extends DataExtension
     {
         foreach ($this->owner->ClamAVScans() as $scan) {
             $scan->processFileActionDelete();
+        }
+    }
+
+    public function onAfterPublish(): void
+    {
+        if (ClamAV::config()->get('only_published_files')) {
+            $this->owner->validate(new ValidationResult());
         }
     }
 }

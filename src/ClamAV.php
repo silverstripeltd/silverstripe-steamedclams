@@ -74,6 +74,8 @@ class ClamAV
      * @var boolean|null
      */
     protected $_cache_isOffline = null;
+    
+    protected bool $only_published_files = false;
 
     /**
      * @param File $file
