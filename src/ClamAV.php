@@ -8,6 +8,7 @@ use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
+use SilverStripe\Control\NullHTTPRequest;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
@@ -280,7 +281,7 @@ class ClamAV
 
             return '';
         }
-        $request = Controller::curr()->getRequest();
+        $request = Controller::curr()?->getRequest() ?? new NullHTTPRequest();
         if (!$request) {
             return '';
         }

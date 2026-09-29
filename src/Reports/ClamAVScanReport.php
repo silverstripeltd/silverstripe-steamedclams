@@ -3,6 +3,7 @@
 namespace Symbiote\SteamedClams\Reports;
 
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\NullHTTPRequest;
 use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
@@ -71,7 +72,7 @@ class ClamAVScanReport extends Report
         $memberField->setEmptyString('All members');
 
         // Workaround for 0 being treated as empty by {@link DropdownField}
-        $filters = Controller::curr()->getRequest()->getVar('filters');
+        $filters = (Controller::curr()?->getRequest() ?? new NullHTTPRequest())->getVar('filters');
         if (isset($filters['Action'])) {
             $action->setValue($filters['Action']);
         }
