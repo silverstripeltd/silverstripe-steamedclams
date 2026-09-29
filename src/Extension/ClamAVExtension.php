@@ -31,13 +31,12 @@ class ClamAVExtension extends Extension
     // public function updateCMSFields(FieldList $fields) {
     // todo(Jake): Show 'ClamAVScans' on AssetAdmin/File level.
     // }
-
     /**
      * This is called within `File::write()` but before `File::onBeforeWrite()`.
      *
      * @param ValidationResult $validationResult
      *
-     * @throws \SilverStripe\ORM\ValidationException
+     * @throws \SilverStripe\Core\Validation\ValidationException
      */
     public function updateValidate(ValidationResult $validationResult): void
     {
@@ -169,7 +168,7 @@ class ClamAVExtension extends Extension
     }
 
     /**
-     * @throws \SilverStripe\ORM\ValidationException
+     * @throws \SilverStripe\Core\Validation\ValidationException
      */
     public function onAfterDelete(): void
     {

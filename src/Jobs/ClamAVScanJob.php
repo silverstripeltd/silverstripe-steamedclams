@@ -63,7 +63,7 @@ if (class_exists(AbstractQueuedJob::class)) {
         /**
          * @return string
          */
-        public function getJobType()
+        public function getJobType(): string
         {
             return QueuedJob::QUEUED;
         }
